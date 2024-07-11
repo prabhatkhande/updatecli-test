@@ -37,8 +37,12 @@ jobs:
         run: |
           curl -sL -o/var/cache/apt/archives/updatecli_amd64.deb https://github.com/updatecli/updatecli/releases/download/v0.80.0/updatecli_arm64.deb | sudo bash
           apt install asdf | sudo bash
+          export "$HOME/.asdf/asdf.sh" > ~/.bashrc
+          export "$HOME/.asdf/completions/asdf.bash" > ~./bashrc
+          source ~/.bashrc
           asdf plugin add updatecli | sudo bash
           asdf install updatecli latest | sudo bash
+          
 
       - name: Verify installations
         run: |
