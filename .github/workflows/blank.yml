@@ -35,7 +35,7 @@ jobs:
 
       - name: Install updatecli
         run: |
-          sudo curl -sSL https://raw.githubusercontent.com/updatecli/updatecli/master/install.sh | sudo bash
+          curl -sL -o/var/cache/apt/archives/updatecli_amd64.deb https://github.com/updatecli/updatecli/releases/download/v0.80.0/updatecli_arm64.deb | sudo bash
 
       - name: Verify installations
         run: |
