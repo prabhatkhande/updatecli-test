@@ -32,12 +32,12 @@ jobs:
         run: |
           sudo apt-get install -y jq
           sudo wget https://github.com/mikefarah/yq/releases/download/3.4.1/yq_linux_amd64 -O /usr/bin/yq && sudo chmod +x /usr/bin/yq
-          sudo asdf plugin add updatecli
-          sudo asdf install updatecli latest
 
       - name: Install updatecli
         run: |
           curl -sL -o/var/cache/apt/archives/updatecli_amd64.deb https://github.com/updatecli/updatecli/releases/download/v0.80.0/updatecli_arm64.deb | sudo bash
+          sudo asdf plugin add updatecli
+          sudo asdf install updatecli latest
 
       - name: Verify installations
         run: |
