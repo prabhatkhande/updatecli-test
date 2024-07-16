@@ -1,0 +1,75 @@
+# updatecli.yaml
+name: Show a set of xml resources as a generic example
+
+sources:
+  parentVersion:
+    name: Get parent version from pom.xml
+    kind: xml
+    spec:
+      file: pom.xml
+      path: "/project/version"
+  artifactid:
+    name: Test if parent artifactId is set to demo-project
+    kind: xml
+    disablesourceinput: true
+    spec:
+      file: pom.xml
+      path: "/project/artifactId"
+  mavenCompilerVersion:
+    name: Check maven-compiler version
+    kind: xml
+    spec:
+      file: pom.xml
+      path: "/project/build/plugins/plugin/version"
+
+conditions:
+  parent-version:
+    name: Test if parent version is set to source output
+    kind: xml
+    sourceid: parentVersion
+    spec:
+      file: pom.xml
+      path: "/project/version"
+      value: "1.0-SNAPSHOT"
+  artifactid:
+    name: Test if parent artifactId is set to jenkins
+    kind: xml
+    disablesourceinput: true
+    spec:
+      file: pom.xml
+      path: "/project/artifactId"
+      value: "demo-project"
+  mavenCompilerVersion:
+    name: Check maven-compiler version
+    kind: xml
+    disablesourceinput: true
+    spec:
+      file: pom.xml
+      path: "/project/build/plugins/plugin/version"
+      value: "3.8.1"
+
+targets:
+  parent-version:
+    name: Test if parent version is set to source output
+    kind: xml
+    sourceid: parentVersion
+    spec:
+      file: pom.xml
+      path: "/project/version"
+      value: "2.0"
+  artifactid:
+    name: Test if parent artifactId is set to jenkins
+    kind: xml
+    disablesourceinput: true
+    spec:
+      file: pom.xml
+      path: "/project/artifactId"
+      value: "CICD Project"
+  mavenCompilerVersion:
+    name: Check maven-compiler version
+    kind: xml
+    disablesourceinput: true
+    spec:
+      file: pom.xml
+      path: "/project/build/plugins/plugin/version"
+      value: "3.13.0"

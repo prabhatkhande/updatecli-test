@@ -18,5 +18,5 @@ targets:
     kind: terraform/file
     sourceid: lastRelease
     spec:
-      file: "./input.tf"
+      file: "./redis.tf"
       path: variable.default

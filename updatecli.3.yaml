@@ -1,0 +1,28 @@
+# updatecli.yaml
+name: CSV manipulation examples
+
+sources:
+  default:
+    name: Basic get query
+    kind: csv
+    spec:
+      file: data.csv
+      key: .[0].Name
+
+conditions:
+  single:
+    name: Basic condition query
+    kind: csv
+    spec:
+      file: data.csv
+      key: .[0].Name
+      value: Alice
+
+targets:
+  single:
+    name: Basic target update
+    kind: csv
+    spec:
+      file: data.csv
+      key: .[1].Name
+      value: Alice
