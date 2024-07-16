@@ -21,6 +21,12 @@ sources:
     spec:
       file: pom.xml
       path: "/project/build/plugins/plugin/version"
+  log4jversion:
+    name: Check Log4j version
+    kind: xml
+    spec:
+      file: pom.xml
+      path: "/project/dependencies/dependency[2]/version"
 
 conditions:
   parent-version:
@@ -47,6 +53,14 @@ conditions:
       file: pom.xml
       path: "/project/build/plugins/plugin/version"
       value: "3.8.1"
+  log4jversion:
+    name: Check Log4j version is available
+    kind: xml
+    disablesourceinput: true
+    spec:
+      file: pom.xml
+      path: "/project/dependencies/dependency[2]/version"
+      value: "2.17.1"
 
 targets:
   parent-version:
@@ -66,10 +80,18 @@ targets:
       path: "/project/artifactId"
       value: "CICD Project"
   mavenCompilerVersion:
-    name: Check maven-compiler version
+    name: test if maven-compiler version is change
     kind: xml
     disablesourceinput: true
     spec:
       file: pom.xml
       path: "/project/build/plugins/plugin/version"
       value: "3.13.0"
+  log4jversion:
+    name: test if Log4j version is change
+    kind: xml
+    disablesourceinput: true
+    spec:
+      file: pom.xml
+      path: "/project/dependencies/dependency[2]/version"
+      value: "2.23.1"
