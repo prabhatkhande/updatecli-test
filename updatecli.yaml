@@ -1,0 +1,23 @@
+sources:
+  lastRelease:
+    kind: helmchart
+    spec:
+      url: oci://ghcr.io/securecodebox/helm/git-repo-scanner
+      chart: git-repo-scanner
+
+conditions:
+  isHelmChartVersionAvailable:
+    name: "Test if the helm chart is available"
+    kind: helmchart
+    spec:
+      url: oci://ghcr.io/securecodebox/helm/git-repo-scanner
+      chart: git-repo-scanner
+      version: 4.6.0
+
+targets:
+  dataFile:
+    name: Bump git-repo-scanner version
+    kind: yaml
+    spec:
+      key: "$.variables.default"
+      file: "./input.yaml"

@@ -1,0 +1,23 @@
+sources:
+  lastRelease:
+    kind: helmchart
+    spec:
+      url: oci://registry-1.docker.io/bitnamicharts/postgresql
+      chart: postgresql
+
+conditions:
+  isHelmChartVersionAvailable:
+    name: "Test if the helm chart is available"
+    kind: helmchart
+    spec:
+      url: oci://registry-1.docker.io/bitnamicharts/postgresql
+      chart: postgresql
+      version: "15.5.16"
+
+targets:
+  dataFile:
+    name: Bump git-repo-scanner version
+    kind: json
+    spec:
+      key: "version"
+      file: "./chart.json"

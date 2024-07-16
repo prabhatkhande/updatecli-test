@@ -1,0 +1,6 @@
+{
+  "chart": "postgresql",
+  "repository": "oci://registry-1.docker.io/bitnamicharts/postgresql",
+  "tf_version_var_name": "POSTGRESSQL_HELM_CHART_VERSION",
+  "version": "15.5.16"
+}

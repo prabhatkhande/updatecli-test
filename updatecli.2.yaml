@@ -1,0 +1,22 @@
+sources:
+  lastRelease:
+    kind: helmchart
+    spec:
+      url: oci://registry-1.docker.io/bitnamicharts/redis
+      chart: redis
+conditions:
+  isRedisHelmChartVersionAvailable:
+    name: "Test if the helm chart is available"
+    kind: helmchart
+    spec:
+      url: oci://registry-1.docker.io/bitnamicharts/redis
+      chart: redis
+      version: "19.6.1"
+targets:
+  update-file:
+    name: Bump redis version
+    kind: terraform/file
+    sourceid: lastRelease
+    spec:
+      file: "./input.tf"
+      path: variable.default
