@@ -1,0 +1,27 @@
+# updatecli.yaml
+sources:
+  local:
+    name: Get value from json
+    kind: json
+    spec:
+      file: data.json
+      key: firstName
+
+conditions:
+  local:
+    name: Test value from json
+    kind: json
+    sourceid: local
+    spec:
+      file: data.json
+      key: firstName
+
+targets:
+  local:
+    name: Test value from json
+    kind: json
+    sourceid: local
+    spec:
+      file: data.json
+      key: firstName
+      value: John
