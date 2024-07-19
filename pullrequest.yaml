@@ -1,0 +1,95 @@
+# updatecli.yaml
+name: Update a file content and open a GitHub Pull Request
+scms:
+  scm1:
+    kind: "github"
+    spec:
+      user: "Prabhat Khande"
+      email: "prabhatkhande786@gmail.com"
+      owner: "prabhatkhande"
+      repository: "updatecli-test"
+      token: '{{ requiredEnv "GITHUB_TOKEN" }}'
+      username: '{{ requiredEnv "GITHUB_AUTHOR" }}'
+      branch: "main"
+      commitmessage:
+        type: "feat"
+        title: "Updating version of helm chart"
+        body: "updated latest version in data.yaml"
+        hidecredit: true
+  scm2:
+    kind: "github"
+    spec:
+      user: "Prabhat Khande"
+      email: "prabhatkhande786@gmail.com"
+      owner: "prabhatkhande"
+      repository: "updatecli-test"
+      token: '{{ requiredEnv "GITHUB_TOKEN" }}'
+      username: '{{ requiredEnv "GITHUB_AUTHOR" }}'
+      branch: "main"
+      commitmessage:
+        type: "feat"
+        title: "Updating version helm chart"
+        body: "Updated latest version in git_repo_scanner.yaml"
+        hidecredit: true
+
+sources:
+  lastRelease:
+    name: Check latest version
+    kind: helmchart
+    spec:
+      url: oci://ghcr.io/securecodebox/helm/git-repo-scanner
+      chart: git-repo-scanner
+
+conditions:
+  isHelmChartVersionAvailable:
+    name: "Test if the helm chart is available"
+    kind: helmchart
+    sourceid: lastRelease
+    spec:
+      url: oci://ghcr.io/securecodebox/helm/git-repo-scanner
+      chart: git-repo-scanner
+
+actions:
+  pull_request1:
+    kind: "github/pullrequest"
+    scmid: scm1
+    targets:
+      - target-one
+    spec:
+      automerge: true
+      description: "Creating a pull request 1"
+      draft: false
+      labels: 
+        - "Dependencies"
+      title: "Update git_repo_scanner helm chart version"
+  pull_request2:
+    kind: "github/pullrequest"
+    scmid: scm2
+    targets:
+      - target-two
+    spec:
+      automerge: true
+      description: "Creating a pull request 2"
+      draft: false
+      labels:
+        - "Dependencies"
+      title: "Update git_repo_scanner helm chart version"
+
+targets:
+  target-one:
+    name: Update version
+    scmid: scm1
+    sourceid: lastRelease
+    kind: yaml
+    spec:
+      file: "git_repo_scanner.yaml"
+      key:  "$.variables.default"
+
+  target-two:
+    name: Update version
+    scmid: scm2
+    sourceid: lastRelease
+    kind: yaml
+    spec:
+      file: "data.yaml"
+      key:  "$.variables.default"
