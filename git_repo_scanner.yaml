@@ -1,4 +1,4 @@
 variables:
     name: git_repo_scanner
     type: string
-    default: 4.6.0
+    default: 4.7.0-alpha.1
