@@ -2,16 +2,15 @@
 name: Show a set of xml resources as a generic example
 
 sources:
-  parentVersion:
-    name: Get parent version from pom.xml
+  parent-version:
+    name: Check parent version
     kind: xml
     spec:
       file: pom.xml
       path: "/project/version"
   artifactid:
-    name: Test if parent artifactId is set to demo-project
+    name: Check parent artifactId
     kind: xml
-    disablesourceinput: true
     spec:
       file: pom.xml
       path: "/project/artifactId"
@@ -22,7 +21,7 @@ sources:
       file: pom.xml
       path: "/project/build/plugins/plugin/version"
   log4jversion:
-    name: Check Log4j version
+    name: Check Log4j version is available
     kind: xml
     spec:
       file: pom.xml
@@ -30,15 +29,15 @@ sources:
 
 conditions:
   parent-version:
-    name: Test if parent version is set to source output
+    name: Test if parent version matches source output
     kind: xml
-    sourceid: parentVersion
+    disablesourceinput: true
     spec:
       file: pom.xml
       path: "/project/version"
       value: "1.0-SNAPSHOT"
   artifactid:
-    name: Test if parent artifactId is set to jenkins
+    name: Test parent artifactId matches source output
     kind: xml
     disablesourceinput: true
     spec:
@@ -46,7 +45,7 @@ conditions:
       path: "/project/artifactId"
       value: "demo-project"
   mavenCompilerVersion:
-    name: Check maven-compiler version
+    name: Check maven-compiler version matches source output
     kind: xml
     disablesourceinput: true
     spec:
@@ -54,7 +53,7 @@ conditions:
       path: "/project/build/plugins/plugin/version"
       value: "3.8.1"
   log4jversion:
-    name: Check Log4j version is available
+    name: Check log4jversion matches source output
     kind: xml
     disablesourceinput: true
     spec:
@@ -64,15 +63,15 @@ conditions:
 
 targets:
   parent-version:
-    name: Test if parent version is set to source output
+    name: Test if parent version is change
     kind: xml
-    sourceid: parentVersion
+    disablesourceinput: true
     spec:
       file: pom.xml
       path: "/project/version"
       value: "2.0"
   artifactid:
-    name: Test if parent artifactId is set to jenkins
+    name: Test if parent artifactId is change
     kind: xml
     disablesourceinput: true
     spec:
