@@ -1,3 +1,0 @@
-container:
-  image: jenkinsci/jenkins
-  tag: 2.467
