@@ -1,0 +1,10 @@
+git_repo_scanner:
+ name: "git-repo-scanner" 
+ git_url: oci://ghcr.io/securecodebox/helm/git-repo-scanner
+
+postgressql:
+  name: postgressql
+  url: oci://registry-1.docker.io/bitnamicharts/postgresql
+
+# - name: redis
+#   url: oci://registry-1.docker.io/bitnamicharts/redis

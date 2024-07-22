@@ -4,7 +4,6 @@ sources:
     spec:
       url: oci://ghcr.io/securecodebox/helm/git-repo-scanner
       chart: git-repo-scanner
-
 conditions:
   isHelmChartVersionAvailable:
     name: "Test if the helm chart is available"
@@ -20,4 +19,4 @@ targets:
     kind: yaml
     spec:
       key: "$.variables.default"
-      file: "./input.yaml"
+      file: "./git_repo_scanner.yaml"
